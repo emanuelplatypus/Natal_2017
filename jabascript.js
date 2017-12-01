@@ -3,7 +3,6 @@ window.onload = function()
 	drawList();
 };
 
-
 var give = ['Sophia',
 'Nicolly',
 'Isabella',
