@@ -52,7 +52,7 @@ function selectPerson(person)
 	{
 		receive.push(name);
 	}
-	result.innerHTML = "<h2>" + name + ", você tirou " + recipientName + "!</h2>";
+	result.innerHTML = "<h2>" + name + ", voce tirou " + recipientName + "!</h2>";
 	close.innerHTML = "<br><br><br><br><br><br>Okay. Clique aqui para apagar o nome da pessoa que você tirou.";
 	if(give.length > 0)
 	{
