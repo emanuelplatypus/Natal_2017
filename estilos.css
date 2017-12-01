@@ -7,7 +7,7 @@ body{
   font-family: 'Open Sans', sans-serif;
   text-align: center;
   font-size: 18px;
-  color: #fff;
+  color: purple;
 }
 .wrapper{
   width: 100%;
@@ -16,7 +16,7 @@ body{
   padding: 0 20px;
 }
 p{
-  color: #fff;
+  color: purple;
    white-space: nowrap;
   -webkit-transform: skew(0, -6deg);
   -moz-transform: skew(0, -6deg);
