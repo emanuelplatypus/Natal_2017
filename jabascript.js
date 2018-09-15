@@ -1,5 +1,4 @@
- <script>
-  $(document).ready(function() {
+ $(document).ready(function() {
     var groupColumn = 2;
     var table = $('#example').DataTable({
         "columnDefs": [
@@ -35,4 +34,3 @@
         }
     } );
 } );
-</script>
