@@ -1,80 +1,38 @@
-window.onload = function()
-{
-	drawList();
-};
-
-var give = ['Sophia',
-'Nicolly',
-'Isabella',
-'Gabriella',
-'Estefanie',
-'Dener',
-'Clara',
-'Brian',
-'Arthur',
-'Andrew'];
-
-var receive = give.concat();
-var peopleWrap = document.getElementById('peopleWrap');
-var people = document.getElementById('people');
-var choose = document.getElementById('choose');
-var result = document.getElementById('result');
-var close = document.getElementById('close');
-
-function drawList()
-{
-	people.innerHTML = '<option value="">Quem é você?</option>';
-	for (var i = give.length - 1; i >= 0; i--) {
-		var option = document.createElement('option');
-		option.value = i;
-		option.innerHTML = give[i];
-		people.appendChild(option);
-	}
-}
-
-function selectPerson(person) 
-{
-	var name = give[person];
-	var nameIndex = receive.indexOf(name);
-	
-	if(nameIndex >= 0) 
-	{
-		receive.splice(nameIndex, 1);
-	}
-	var recipient = Math.floor((Math.random() * receive.length));
-	var recipientName = receive[recipient];
-	
-	receive.splice(recipient, 1);
-	give.splice(person, 1);
-
-	if(nameIndex >= 0)
-	{
-		receive.push(name);
-	}
-	result.innerHTML = "<h2>" + name + ", você tirou " + recipientName + "!</h2>";
-	close.innerHTML = "<br><br><br><br><br><br>Okay. Clique aqui para apagar o nome da pessoa que você tirou.";
-	if(give.length > 0)
-	{
-		drawList();
-	}
-}
-
-choose.onclick = function()
-{
-	if(people.value)
-	{
-		selectPerson(people.value);
-	}
-};
-
-close.onclick = function()
-{
-	result.innerHTML = "";
-	close.innerHTML = "";
-  if(give.length == 0){
- peopleWrap.parentNode.removeChild(peopleWrap);
-		choose.parentNode.removeChild(choose);
-		result.innerHTML = "<h2>Fim do sorteio!!!</h2>";
-		close.innerHTML = "";
-	}
-};
+<script>
+ $(document).ready(function() {
+    var groupColumn = 2;
+    var table = $('#example').DataTable({
+        "columnDefs": [
+            { "visible": false, "targets": groupColumn }
+        ],
+        "order": [[ groupColumn, 'asc' ]],
+        "displayLength": 25,
+        "drawCallback": function ( settings ) {
+            var api = this.api();
+            var rows = api.rows( {page:'current'} ).nodes();
+            var last=null;
+ 
+            api.column(groupColumn, {page:'current'} ).data().each( function ( group, i ) {
+                if ( last !== group ) {
+                    $(rows).eq( i ).before(
+                        '<tr class="group"><td colspan="5">'+group+'</td></tr>'
+                    );
+ 
+                    last = group;
+                }
+            } );
+        }
+    } );
+ 
+    // Order by the grouping
+    $('#example tbody').on( 'click', 'tr.group', function () {
+        var currentOrder = table.order()[0];
+        if ( currentOrder[0] === groupColumn && currentOrder[1] === 'asc' ) {
+            table.order( [ groupColumn, 'desc' ] ).draw();
+        }
+        else {
+            table.order( [ groupColumn, 'asc' ] ).draw();
+        }
+    } );
+} );
+</script>
